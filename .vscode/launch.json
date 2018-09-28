@@ -34,6 +34,12 @@
       "outputCapture": "std",
       "internalConsoleOptions": "openOnSessionStart",
       "cwd": "${workspaceFolder}/packages/app/main"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch emulator/cli",
+      "program": "${workspaceFolder}/packages/emulator/cli/lib/index.js"
     }
   ]
 }

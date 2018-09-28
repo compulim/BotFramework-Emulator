@@ -35,7 +35,11 @@ import User from '../types/user';
 
 export default class Users {
   public currentUserId: string = 'default-user';
-  public users: { [userId: string]: User };
+  public users: { [userId: string]: User } = {};
+
+  public upsertUser(user: User) {
+    this.users[user.id] = user;
+  }
 
   public usersById(userId: string): User {
     return this.users[userId];

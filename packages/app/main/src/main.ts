@@ -288,11 +288,12 @@ const createMainWindow = async () => {
   const emulatorInstance = await Emulator.startup();
   const { users: userSettings } = getSettingsStore().getState();
 
-  const users = new Users();
-  users.currentUserId = userSettings.currentUserId;
-  users.users = userSettings.usersById;
+  Object.keys(userSettings.usersById).forEach(id => {
+    const user = userSettings.usersById[id];
 
-  emulatorInstance.framework.server.botEmulator.facilities.users = users;
+    emulatorInstance.framework.server.botEmulator.facilities.users.upsertUser(user);
+  });
+
   loadMainPage();
 
   mainWindow.browserWindow.setTitle(app.getName());

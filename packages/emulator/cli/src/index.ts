@@ -120,6 +120,12 @@ async function main() {
     });
   }
 
+  // Add default user
+  bot.facilities.users.upsertUser({
+    id: 'default-user',
+    name: 'User'
+  });
+
   // Mount bot routes on the server
   bot.mount(server);
 
