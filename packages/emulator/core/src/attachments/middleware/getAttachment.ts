@@ -52,7 +52,7 @@ export default function getAttachment(bot: BotEmulator) {
           const attachmentBase64 = parms.viewId === 'original' ? attachment.originalBase64 : attachment.thumbnailBase64;
 
           if (attachmentBase64) {
-            const buffer = new Buffer(attachmentBase64, 'base64');
+            const buffer = Buffer.from(attachmentBase64, 'base64');
 
             res.contentType = attachment.type;
             res.send(HttpStatus.OK, buffer);
@@ -69,7 +69,7 @@ export default function getAttachment(bot: BotEmulator) {
       sendErrorResponse(req, res, next, createAPIException(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCodes.ServiceError,
         err.message));
     }
-    
+
     next();
   };
 }

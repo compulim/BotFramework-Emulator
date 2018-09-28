@@ -47,7 +47,7 @@ export default function startConversation(botEmulator: BotEmulator) {
     const tokenMatch = /Bearer\s+(.+)/.exec(auth);
     const botEndpoint: BotEndpoint = (req as any).botEndpoint;
     const conversationId = onErrorResumeNext(() => {
-      const optionsJson = new Buffer(tokenMatch[1], 'base64').toString('utf8');
+      const optionsJson = Buffer.from(tokenMatch[1], 'base64').toString('utf8');
 
       return JSON.parse(optionsJson).conversationId;
     }) || uniqueId();
@@ -76,7 +76,7 @@ export default function startConversation(botEmulator: BotEmulator) {
         conversation.addMember(currentUser.id, currentUser.name);
       }
     }
-    
+
     (req as any).conversation = conversation;
 
     // TODO: We should issue a real token, rather than a conversation ID
@@ -88,7 +88,7 @@ export default function startConversation(botEmulator: BotEmulator) {
     });
 
     res.end();
-    
+
     next();
   };
 }

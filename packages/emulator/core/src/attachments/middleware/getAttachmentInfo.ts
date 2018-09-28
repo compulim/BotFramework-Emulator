@@ -57,13 +57,13 @@ export default function getAttachmentInfo(botEmulator: BotEmulator) {
 
         if (attachment.originalBase64) {
           attachmentInfo.views.push({
-            viewId: 'original', size: new Buffer(attachment.originalBase64, 'base64').length
+            viewId: 'original', size: Buffer.from(attachment.originalBase64, 'base64').length
           });
         }
 
         if (attachment.thumbnailBase64) {
           attachmentInfo.views.push({
-            viewId: 'thumbnail', size: new Buffer(attachment.thumbnailBase64, 'base64').length
+            viewId: 'thumbnail', size: Buffer.from(attachment.thumbnailBase64, 'base64').length
           });
         }
 
@@ -77,7 +77,7 @@ export default function getAttachmentInfo(botEmulator: BotEmulator) {
       sendErrorResponse(req, res, next, createAPIException(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCodes.ServiceError,
         err.message));
     }
-    
+
     next();
   };
 }
